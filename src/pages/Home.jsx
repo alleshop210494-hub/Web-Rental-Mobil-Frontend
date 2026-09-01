@@ -4,11 +4,12 @@ import { MainLayout } from '../layouts/MainLayout';
 import { useCars } from '../features/cars/hooks/useCars';
 import { CarCard } from '../features/cars/components/CarCard';
 import { BookingModal } from '../features/cars/components/BookingModal';
-import { ShieldCheck, Clock, MapPin, Sparkles } from 'lucide-react';
+import { ShieldCheck, Clock, MapPin, Sparkles, Car as CarIcon } from 'lucide-react';
 
 export const Home = () => {
   const { cars, loading, error } = useCars();
   const [selectedCar, setSelectedCar] = useState(null);
+  const [heroImageError, setHeroImageError] = useState(false);
 
   const handleSelectCar = (car) => {
     setSelectedCar(car);
@@ -46,11 +47,22 @@ export const Home = () => {
             </div>
           </div>
           <div className="hidden md:block">
-            <img 
-              src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=800&q=80" 
-              alt="Rental Mobil Pontianak" 
-              className="rounded-2xl shadow-2xl border-4 border-white/10 object-cover h-[400px] w-full"
-            />
+            <div className="rounded-2xl shadow-2xl border-4 border-white/10 overflow-hidden h-[450px] w-full bg-blue-800 relative flex items-center justify-center">
+              {!heroImageError ? (
+                <img 
+                  src="/images/hero-car.jpg" 
+                  alt="Rental Mobil Pontianak" 
+                  onError={() => setHeroImageError(true)}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className="w-full h-full bg-gradient-to-br from-blue-700 to-blue-900 flex flex-col items-center justify-center text-white p-6 text-center">
+                  <CarIcon size={80} className="text-white/90 mb-4 drop-shadow-lg" />
+                  <span className="text-lg font-bold">Rental Mobil Pontianak</span>
+                  <span className="text-xs text-blue-200 mt-1">Letakkan gambar Anda di folder public/images/hero-car.jpg</span>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </section>
