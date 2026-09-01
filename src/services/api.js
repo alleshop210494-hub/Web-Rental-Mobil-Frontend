@@ -1,16 +1,22 @@
 // src/services/api.js
 import axios from 'axios';
 
-// Sesuaikan baseURL dengan URL backend Anda (misal URL StackBlitz backend atau port lokal)
+const getBaseUrl = () => {
+  const hostname = window.location.hostname;
+  if (hostname.includes('webcontainer.io') || hostname.includes('stackblitz')) {
+    return window.location.origin.replace('5173', '3000') + '/api';
+  }
+  return 'http://localhost:3000/api';
+};
+
 const API = axios.create({
-  baseURL: 'http://localhost:3000/api', // Ubah jika backend berjalan di domain/port lain
+  baseURL: getBaseUrl(),
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json'
   }
 });
 
-// Interceptor untuk menangani respons atau error global
 API.interceptors.response.use(
   (response) => response.data,
   (error) => {

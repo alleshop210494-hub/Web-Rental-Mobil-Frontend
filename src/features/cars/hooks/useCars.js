@@ -12,9 +12,20 @@ export const useCars = () => {
       setLoading(true);
       setError(null);
       const response = await carService.getAllCars();
-      setCars(response.data || []);
+
+      let carData = [];
+      if (Array.isArray(response)) {
+        carData = response;
+      } else if (response && Array.isArray(response.data)) {
+        carData = response.data;
+      } else if (response && response.data && Array.isArray(response.data.data)) {
+        carData = response.data.data;
+      }
+
+      setCars(carData);
     } catch (err) {
       setError(err.message || 'Gagal memuat katalog mobil');
+      setCars([]);
     } finally {
       setLoading(false);
     }

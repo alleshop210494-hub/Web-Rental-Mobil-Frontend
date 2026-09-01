@@ -1,19 +1,29 @@
 // src/features/cars/components/CarCard.jsx
-import React from 'react';
+import React, { useState } from 'react';
 import { formatRupiah } from '../../../utils/formatCurrency';
-import { Users, Settings } from 'lucide-react';
+import { Users, Settings, Car as CarIcon } from 'lucide-react';
 
 export const CarCard = ({ car, onSelect }) => {
+  const [hasError, setHasError] = useState(false);
+
   return (
     <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 transition-all duration-300 hover:shadow-xl flex flex-col justify-between">
       <div>
-        <div className="relative h-48 overflow-hidden bg-gray-200">
-          <img 
-            src={car.image} 
-            alt={car.name} 
-            className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-          />
-          <span className="absolute top-3 right-3 bg-blue-600 text-white text-xs font-semibold px-2.5 py-1 rounded-full shadow">
+        <div className="relative h-48 bg-gray-100 overflow-hidden flex items-center justify-center">
+          {!hasError && car.image ? (
+            <img 
+              src={car.image} 
+              alt={car.name} 
+              onError={() => setHasError(true)}
+              className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+            />
+          ) : (
+            <div className="w-full h-full bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center text-white relative">
+              <div className="absolute inset-0 bg-black/10"></div>
+              <CarIcon size={64} className="relative z-10 text-white/90 drop-shadow-md" />
+            </div>
+          )}
+          <span className="absolute top-3 right-3 bg-blue-600 text-white text-xs font-semibold px-2.5 py-1 rounded-full shadow z-10">
             {car.category}
           </span>
         </div>

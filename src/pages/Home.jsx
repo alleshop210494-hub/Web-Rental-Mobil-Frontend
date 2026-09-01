@@ -4,7 +4,7 @@ import { MainLayout } from '../layouts/MainLayout';
 import { useCars } from '../features/cars/hooks/useCars';
 import { CarCard } from '../features/cars/components/CarCard';
 import { BookingModal } from '../features/cars/components/BookingModal';
-import { ShieldCheck, Clock, MapPinCheck, Sparkles } from 'lucide-react';
+import { ShieldCheck, Clock, MapPin, Sparkles } from 'lucide-react';
 
 export const Home = () => {
   const { cars, loading, error } = useCars();
@@ -78,7 +78,7 @@ export const Home = () => {
             </div>
             <div className="bg-gray-50 p-8 rounded-2xl border border-gray-100 shadow-sm text-center">
               <div className="bg-blue-100 text-blue-600 w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4">
-                <MapPinCheck size={24} />
+                <MapPin size={24} />
               </div>
               <h4 className="text-lg font-bold text-gray-900 mb-2">Antar Jemput Gratis</h4>
               <p className="text-gray-600 text-sm">Gratis layanan antar jemput unit langsung ke lokasi Anda di dalam wilayah kota Pontianak atau Bandara Supadio.</p>
