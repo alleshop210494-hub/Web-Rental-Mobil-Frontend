@@ -1,34 +1,50 @@
 // src/layouts/MainLayout.jsx
-import React from 'react';
-import { Car, Phone, MapPin } from 'lucide-react';
+import React, { useState } from 'react';
+import { Car as CarIcon, Phone } from 'lucide-react';
 
 export const MainLayout = ({ children }) => {
+  const [logoError, setLogoError] = useState(false);
+
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50 text-gray-800 font-sans">
+    <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
       <header className="bg-white shadow-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="bg-blue-600 text-white p-2.5 rounded-xl shadow-md">
-              <Car size={26} />
-            </div>
+            {!logoError ? (
+              <img 
+                src="/images/logo1.png" 
+                alt="Logo Rental Mobil Pontianak" 
+                onError={() => setLogoError(true)}
+                className="w-12 h-12 object-contain rounded-xl shadow-md bg-blue-600 p-1.5"
+              />
+            ) : (
+              <div className="w-12 h-12 bg-blue-600 text-white rounded-xl flex items-center justify-center shadow-md">
+                <CarIcon size={24} />
+              </div>
+            )}
             <div>
-              <h1 className="text-xl font-extrabold text-gray-900 tracking-tight">Rental Mobil Pontianak</h1>
-              <p className="text-xs text-gray-500">Aman, Nyaman, & Terpercaya</p>
+              <h1 className="text-xl font-extrabold text-gray-900 leading-tight">Rental Mobil Pontianak</h1>
+              <p className="text-xs text-gray-500 font-medium">Aman, Nyaman, & Terpercaya</p>
             </div>
           </div>
-          <nav className="hidden md:flex items-center gap-8 font-medium text-gray-600">
-            <a href="#hero" className="hover:text-blue-600 transition">Beranda</a>
-            <a href="#catalog" className="hover:text-blue-600 transition">Katalog Mobil</a>
-            <a href="#features" className="hover:text-blue-600 transition">Keunggulan</a>
+
+          <nav className="hidden md:flex items-center gap-8">
+            <a href="#" className="text-gray-600 hover:text-blue-600 font-medium transition">Beranda</a>
+            <a href="#catalog" className="text-gray-600 hover:text-blue-600 font-medium transition">Katalog Mobil</a>
+            <a href="#features" className="text-gray-600 hover:text-blue-600 font-medium transition">Keunggulan</a>
           </nav>
-          <a 
-            href="https://wa.me/6281234567890" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-5 py-2.5 rounded-xl shadow-md flex items-center gap-2 text-sm transition"
-          >
-            <Phone size={16} /> WhatsApp
-          </a>
+
+          <div>
+            <a 
+              href="https://wa.me/6281234567890" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="bg-emerald-600 hover:bg-emerald-700 text-white font-medium px-5 py-2.5 rounded-xl shadow-md flex items-center gap-2 transition"
+            >
+              <Phone size={18} />
+              <span>WhatsApp</span>
+            </a>
+          </div>
         </div>
       </header>
 
@@ -36,36 +52,36 @@ export const MainLayout = ({ children }) => {
         {children}
       </main>
 
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <footer className="bg-gray-900 text-gray-300 py-12 border-t border-gray-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="bg-blue-600 text-white p-2 rounded-lg">
-                <Car size={22} />
+              <div className="w-10 h-10 bg-blue-600 text-white rounded-lg flex items-center justify-center shadow">
+                <CarIcon size={20} />
               </div>
-              <span className="text-lg font-bold">Rental Mobil Pontianak</span>
+              <h3 className="text-lg font-bold text-white">Rental Mobil Pontianak</h3>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed">
-              Solusi transportasi terbaik dan terpercaya di Pontianak dan sekitarnya. Melayani sewa harian, mingguan, maupun mobil pengantin.
+              Solusi transportasi terpercaya untuk perjalanan bisnis, liburan, dan acara penting Anda di seluruh wilayah Pontianak dan sekitarnya.
             </p>
           </div>
           <div>
-            <h4 className="text-md font-semibold mb-4 text-gray-200">Kontak Kami</h4>
-            <p className="text-gray-400 text-sm mb-2 flex items-center gap-2">
-              <MapPin size={16} className="text-blue-500" /> Jl. A. Yani, Kota Pontianak, Kalimantan Barat
-            </p>
-            <p className="text-gray-400 text-sm mb-2 flex items-center gap-2">
-              <Phone size={16} className="text-emerald-500" /> +62 812-3456-7890
-            </p>
+            <h4 className="text-white font-semibold mb-4 text-base">Tautan Cepat</h4>
+            <ul className="space-y-2 text-sm">
+              <li><a href="#" className="hover:text-white transition">Beranda</a></li>
+              <li><a href="#catalog" className="hover:text-white transition">Katalog Mobil</a></li>
+              <li><a href="#features" className="hover:text-white transition">Keunggulan Kami</a></li>
+            </ul>
           </div>
           <div>
-            <h4 className="text-md font-semibold mb-4 text-gray-200">Jam Operasional</h4>
-            <p className="text-gray-400 text-sm mb-1">Senin - Minggu: 24 Jam</p>
-            <p className="text-gray-400 text-sm">Layanan darurat & antar jemput bandara selalu siap.</p>
+            <h4 className="text-white font-semibold mb-4 text-base">Hubungi Kami</h4>
+            <p className="text-gray-400 text-sm mb-2">Jl. Contoh Alamat No. 123, Kota Pontianak, Kalimantan Barat</p>
+            <p className="text-gray-400 text-sm mb-2">Telepon / WhatsApp: 0812-3456-7890</p>
+            <p className="text-gray-400 text-sm">Email: info@rentalmobilpontianak.com</p>
           </div>
         </div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-gray-800 mt-8 pt-6 text-center text-xs text-gray-500">
-          &copy; 2026 Rental Mobil Pontianak. All rights reserved.
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-gray-800 pt-6 text-center text-xs text-gray-500">
+          &copy; {new Date().getFullYear()} Rental Mobil Pontianak. Hak Cipta Dilindungi.
         </div>
       </footer>
     </div>
